@@ -1,18 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_BUFFER_SIZE 200
+#define MAX_CHARS 200
 
 int main(int argc, char *argv[])
 {
 
+    FILE * inputFile;
+    char * row;
+
+    // Testing args
     printf("You have entered %d arguments:\n", argc);
  
     for (int i = 0; i < argc; i++) {
         printf("%s\n", argv[i]);
     }
 
-    FILE * inputFile = fopen(argv[1], "r");
+    inputFile = fopen(argv[1], "r");
 
     if (inputFile == NULL) {
         printf("%s\n", "Erreur: Dictionnaire sélectionné non valide");
@@ -20,16 +24,17 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    char str[MAX_BUFFER_SIZE];
+    row = (char*)malloc(MAX_CHARS* sizeof(char));
 
-    while (fgets(str, MAX_BUFFER_SIZE, inputFile) != NULL) {
-        printf("%s", str);
-        // printf("hmm");
+    while (fgets(row, MAX_CHARS, inputFile) != NULL) {
+        printf("row: %s", row);
+        // operations...
+
+        free(row);
+        row = (char*)malloc(MAX_CHARS* sizeof(char));
     }
 
-
-
-    // printf(inputFile);
+    free(row);
 
     return 0;
 }
