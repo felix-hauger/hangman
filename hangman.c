@@ -2,15 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_CHARS 200
+char *get_random_word(char *dict_file_name, char *category, char *difficulty);
 
 int main(int argc, char *argv[])
 {
-
-    FILE * inputFile;
-    char * row;
-    char * token;
-
 
     // Testing args
     printf("You have entered %d arguments:\n", argc);
@@ -19,34 +14,13 @@ int main(int argc, char *argv[])
         printf("%s\n", argv[i]);
     }
 
-    inputFile = fopen(argv[1], "r");
-
-    if (inputFile == NULL) {
+    if (argv[1] == NULL) {
         printf("%s\n", "Erreur: Dictionnaire sélectionné non valide");
 
         return 1;
     }
 
-    row = (char*)malloc(MAX_CHARS* sizeof(char));
-
-    while (fgets(row, MAX_CHARS, inputFile) != NULL) {
-        // printf("row: %s", row);
-        // operations...
-        // Tokenize (splice) rows with commas (,)
-        token = strtok(row, ",");
-
-        while (token != NULL) {
-            printf("Token: %s\n", token);
-
-            // Resume tokenizing from last position
-            token = strtok(NULL, ",");
-        }
-
-        free(row);
-        row = (char*)malloc(MAX_CHARS* sizeof(char));
-    }
-
-    free(row);
+    get_random_word(argv[1], argv[2], argv[3]);
 
     return 0;
 }
