@@ -1,0 +1,11 @@
+#Fruits
+pomme,fruits,facile
+banane,fruits,facile
+noix de coco,fruits,moyen
+papaye,fruits,difficile
+
+#Langages
+Cobol,langages,difficile
+JavaScript,langages,moyen
+Assembly,langages,nope
+Java, langages, facile
