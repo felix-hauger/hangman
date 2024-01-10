@@ -4,6 +4,15 @@
 
 #define MAX_CHARS 200
 
+
+typedef struct Word
+{
+    char *word;
+    char *difficulty;
+    char *category;
+}_Word;
+
+
 char *get_random_word(char *dict_file_name, char *category, char *difficulty)
 {
     FILE * inputFile;
@@ -18,26 +27,62 @@ char *get_random_word(char *dict_file_name, char *category, char *difficulty)
 
     row = (char*)malloc(MAX_CHARS* sizeof(char));
 
+    _Word *words = malloc(sizeof(_Word) * 500);
+
+    int array_result_index = 0;
+
     while (fgets(row, MAX_CHARS, inputFile) != NULL) {
-        // printf("row: %s", row);
+        struct Word current_word;
 
-        // operations...
+        // Ignore comments and empty lines
+        if (strlen(row) > 1 && row[0] != '#') {
 
-        // Tokenize (splice) rows with commas (,)
-        token = strtok(row, ",");
+            // Tokenize rows with commas (,)
+            token = strtok(row, ",");
 
-        while (token != NULL) {
-            printf("Token: %s\n", token);
+            int token_index = 0;
 
-            // Resume tokenizing from last position
-            token = strtok(NULL, ",");
+            while (token != NULL) {
+
+                // Select word
+                if (token_index == 0) {
+                    current_word.word = token;
+                }
+                printf("Token: %s\n", token);
+                // printf("Word: %s\n", word);
+
+                // Select category
+                if (token_index == 1) {
+                    // Compare current category to selected category
+                    if (strcmp(token, category) == 0) {
+                        printf("CATEGORY FOUND: %s\n", category);
+                        printf("Adding word %s\n", current_word.word);
+
+                        words[array_result_index] = current_word;
+                        array_result_index++;
+                        row = (char*)malloc(MAX_CHARS* sizeof(char));
+                    }
+                }
+
+                // Resume tokenizing from last position
+                token = strtok(NULL, ",");
+
+                token_index++;
+            }
+
         }
-
-        free(row);
-        row = (char*)malloc(MAX_CHARS* sizeof(char));
     }
 
+
+
+    printf("%d\n", array_result_index);
+    while (array_result_index--) {
+        printf("Array result: %s\n", words[array_result_index].word);
+        free(words[array_result_index].word);
+    }
+    free(words);
     free(row);
+     //printf("Array result: %s\n", ( words )[3].word);
 
     return dict_file_name;
 }
