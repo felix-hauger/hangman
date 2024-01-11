@@ -8,9 +8,10 @@
 
 typedef struct Game
 {
-    int status; // 1 = win, -1 = lose, 0 = ongoing
+    char status; // w = win, l = lose, o = ongoing, r = restart
     int lives;
     char *word_to_find;
+    char *user_word; // The hidden word displayed to the user
 }_Game;
 
 typedef struct Word
@@ -20,7 +21,7 @@ typedef struct Word
     char *category;
 }_Word;
 
-
+void init_game(_Game *game, char *word_to_find);
 int my_strlen(char *str);
 int my_strcmp(char *s1, char *s2);
 char *my_strdup(char *str);

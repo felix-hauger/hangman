@@ -6,6 +6,23 @@
 
 #include "hangman.h"
 
+void init_game(_Game *game, char *word_to_find)
+{
+    game->word_to_find = word_to_find;
+
+    game->user_word = (char*)malloc(sizeof(char *) * my_strlen(game->word_to_find));
+
+    int i = 0;
+
+    while (game->word_to_find[i] != 0) {
+        printf("test%d\n", i);
+        (*game).user_word[i] = '*';
+        i++;
+    }
+
+    game->user_word[i] = 0;
+}
+
 #define MAX_CHARS 200
 
 char *get_random_word(char *dict_file_name, char *category, char *difficulty)

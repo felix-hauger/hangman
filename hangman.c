@@ -24,9 +24,15 @@ int main(int argc, char *argv[])
 
     char *word = get_random_word(argv[1], argv[3], argv[2]);
 
-    printf("Word: %s", word);
+    printf("Word: %s\n", word);
+
+    _Game game;
+
+    init_game(&game, word);
 
 
+    printf("Word to find: %s\n", game.word_to_find);
+    printf("User word: %s\n", game.user_word);
 
     return 0;
 }
