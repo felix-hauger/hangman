@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "hangman.h"
+
 char *get_random_word(char *dict_file_name, char *category, char *difficulty);
 
 int main(int argc, char *argv[])
@@ -20,7 +22,11 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    get_random_word(argv[1], argv[3], argv[2]);
+    char *word = get_random_word(argv[1], argv[3], argv[2]);
+
+    printf("Word: %s", word);
+
+
 
     return 0;
 }

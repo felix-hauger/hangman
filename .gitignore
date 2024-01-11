@@ -2,3 +2,6 @@ main
 main.c
 test.c
 .vscode/
+*.o
+hangman
+test*
