@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 
 #define MAX_CHARS 200
 
@@ -14,7 +15,8 @@ typedef struct Word
 
 char *rtrim(char *s);
 int my_strcmp(char *s1, char *s2);
-
+int my_strlen(char *str);
+char *my_strdup(char *str);
 
 char *get_random_word(char *dict_file_name, char *category, char *difficulty)
 {
@@ -85,16 +87,26 @@ char *get_random_word(char *dict_file_name, char *category, char *difficulty)
         }
     }
 
+    // Init rand
+    srand(time(NULL));
+
+    int r = rand() % array_result_index;
+
+    // Select random word from matching results
+    char *result = my_strdup(words[r].word);
+    // printf("RAND: %d\n");
+
+    printf("RESULT: %s\n", result);
+
     while (array_result_index--) {
-        printf("Array result: %s\n", words[array_result_index].word);
+        // printf("Array result: %s\n", words[array_result_index].word);
         free(words[array_result_index].word);
     }
     free(words);
     free(row);
 
-    return dict_file_name;
+    return result;
 }
-
 
 char *ltrim(char *s)
 {
@@ -128,4 +140,41 @@ int my_strcmp(char *s1, char *s2)
         i++;
     }
     return 0;
+}
+
+int my_strlen(char *str)
+{
+    int len = 0;
+
+    while (str[len] != 0) {
+        len++;
+    }
+
+    return len;
+}
+
+char *my_strcpy(char *dest, char *src)
+{
+    int i = 0;
+
+    while (src[i] != 0) {
+        dest[i] = src[i];
+
+        i++;
+    }
+
+    dest[i] = 0;
+
+    return dest;
+}
+
+char *my_strdup(char *src)
+{
+    int str_length = my_strlen(src);
+
+    char *str = (char*)malloc(sizeof(char*) * str_length);
+
+    my_strcpy(str, src);
+
+    return str;
 }
