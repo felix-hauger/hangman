@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define MAX_CHARS 200
-
 
 typedef struct Word
 {
@@ -11,6 +11,9 @@ typedef struct Word
     char *difficulty;
     char *category;
 }_Word;
+
+char *rtrim(char *s);
+int my_strcmp(char *s1, char *s2);
 
 
 char *get_random_word(char *dict_file_name, char *category, char *difficulty)
@@ -44,24 +47,20 @@ char *get_random_word(char *dict_file_name, char *category, char *difficulty)
 
             while (token != NULL) {
 
-                // Select word
-                if (token_index == 0) {
-                    current_word.word = token;
-                }
                 printf("Token: %s\n", token);
-                // printf("Word: %s\n", word);
 
-                // Select category
-                if (token_index == 1) {
+                if (token_index == 0) {
+                    // Select word
+                    current_word.word = token;
+                } else if (token_index == 1) {
+                    // Select category
+                    current_word.category = token;
+
                     // Compare current category to selected category
-                    if (strcmp(token, category) == 0) {
-                        printf("CATEGORY FOUND: %s\n", category);
-                        printf("Adding word %s\n", current_word.word);
 
-                        words[array_result_index] = current_word;
-                        array_result_index++;
-                        row = (char*)malloc(MAX_CHARS* sizeof(char));
-                    }
+                } else if (token_index == 2) {
+                    // Remove line break at the end of the line
+                    current_word.difficulty = rtrim(token);
                 }
 
                 // Resume tokenizing from last position
@@ -70,19 +69,63 @@ char *get_random_word(char *dict_file_name, char *category, char *difficulty)
                 token_index++;
             }
 
+            if (my_strcmp(current_word.category, category) == 0 ) {
+
+                // printf("MATCHING CATEGORY %s\n", category);
+
+                if (my_strcmp(current_word.difficulty, difficulty) == 0) {
+                    // printf("MATCHING DIFFICULTY %s\n", difficulty);
+                    // printf("Adding word %s\n", current_word.word);
+
+                    words[array_result_index] = current_word;
+                    array_result_index++;
+                    row = (char*)malloc(MAX_CHARS* sizeof(char));
+                }
+            }
         }
     }
 
-
-
-    printf("%d\n", array_result_index);
     while (array_result_index--) {
         printf("Array result: %s\n", words[array_result_index].word);
         free(words[array_result_index].word);
     }
     free(words);
     free(row);
-     //printf("Array result: %s\n", ( words )[3].word);
 
     return dict_file_name;
+}
+
+
+char *ltrim(char *s)
+{
+    while(isspace(*s)) s++;
+    return s;
+}
+
+char *rtrim(char *s)
+{
+    char* back = s + strlen(s);
+    while(isspace(*--back));
+    *(back+1) = '\0';
+    return s;
+}
+
+char *trim(char *s)
+{
+    return rtrim(ltrim(s)); 
+}
+
+int my_strcmp(char *s1, char *s2)
+{
+    int i = 0;
+
+    while (s1[i] || s2[i]) {
+        if (s1[i] > s2[i]) {
+            return 1;
+        } else if (s2[i] > s1[i]) {
+            return -1;
+        }
+        i++;
+    }
+    return 0;
 }
