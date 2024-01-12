@@ -29,6 +29,8 @@ char *rtrim(char *s);
 int my_strcmp(char *s1, char *s2);
 int my_strlen(char *str);
 char *my_strdup(char *str);
+FILE * read_file(char *file_name);
+char *get_random_word(FILE * dictionary_file, char *category, char *difficulty);
 
 
 

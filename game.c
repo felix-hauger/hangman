@@ -25,17 +25,13 @@ void init_game(_Game *game, char *word_to_find)
 
 #define MAX_CHARS 200
 
-char *get_random_word(char *dict_file_name, char *category, char *difficulty)
+char *get_random_word(FILE *dictionary_file, char *category, char *difficulty)
 {
-    FILE * inputFile;
     char * row;
     char * token;
 
-    printf("Dictionary file name: %s\n", dict_file_name);
     printf("Category: %s\n", category);
     printf("Difficulty: %s\n", difficulty);
-
-    inputFile = fopen(dict_file_name, "r");
 
     row = (char*)malloc(MAX_CHARS* sizeof(char));
 
@@ -43,7 +39,7 @@ char *get_random_word(char *dict_file_name, char *category, char *difficulty)
 
     int array_result_index = 0;
 
-    while (fgets(row, MAX_CHARS, inputFile) != NULL) {
+    while (fgets(row, MAX_CHARS, dictionary_file) != NULL) {
         struct Word current_word;
 
         // Ignore comments and empty lines

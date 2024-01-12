@@ -4,10 +4,9 @@
 
 #include "hangman.h"
 
-char *get_random_word(char *dict_file_name, char *category, char *difficulty);
-
 int main(int argc, char *argv[])
 {
+    FILE * dictionary = read_file(argv[1]);
 
     // Testing args
     printf("You have entered %d arguments:\n", argc);
@@ -16,13 +15,13 @@ int main(int argc, char *argv[])
         printf("%s\n", argv[i]);
     }
 
-    if (argv[1] == NULL) {
+    if (dictionary == NULL) {
         printf("%s\n", "Erreur: Dictionnaire sélectionné non valide");
 
         return 1;
     }
 
-    char *word = get_random_word(argv[1], argv[3], argv[2]);
+    char *word = get_random_word(dictionary, argv[3], argv[2]);
 
     printf("Word: %s\n", word);
 

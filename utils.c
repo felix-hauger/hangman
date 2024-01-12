@@ -8,6 +8,10 @@
 
 
 // char *hide_word
+FILE * read_file(char *file_name)
+{
+    return fopen(file_name, "r");
+}
 
 char *ltrim(char *s)
 {
