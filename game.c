@@ -14,9 +14,14 @@ void init_game(_Game *game, char *word_to_find)
 
     int i = 0;
 
+    // Fill the word displayed to the user, using the word to find
     while (game->word_to_find[i] != 0) {
-        printf("test%d\n", i);
-        (*game).user_word[i] = '*';
+        // Display the first and last characters as hints
+        if (i == 0 || i == my_strlen(game->word_to_find) - 1) {
+            (*game).user_word[i] = game->word_to_find[i];
+        } else {
+            (*game).user_word[i] = '*';
+        }
         i++;
     }
 

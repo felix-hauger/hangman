@@ -42,6 +42,9 @@ int main(int argc, char *argv[])
     char input_str[20];
 
     while (game.status == 'o') {
+
+        printf("User word: %s\n", game.user_word);
+
         if (my_strcmp(game.user_word, game.word_to_find) == 0) {
             printf("C'est gagné !\n");
             break;
@@ -51,7 +54,6 @@ int main(int argc, char *argv[])
             break;
         }
 
-        printf("User word: %s\n", game.user_word);
         printf("You have %d lives\n", game.lives);
 
         printf("Tapez une lettre\n");
