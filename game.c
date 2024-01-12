@@ -21,6 +21,10 @@ void init_game(_Game *game, char *word_to_find)
     }
 
     game->user_word[i] = 0;
+
+    game->lives = 6;
+
+    game->status = 'o';
 }
 
 #define MAX_CHARS 200
@@ -52,7 +56,7 @@ char *get_random_word(FILE *dictionary_file, char *category, char *difficulty)
 
             while (token != NULL) {
 
-                printf("Token: %s\n", token);
+                // printf("Token: %s\n", token);
 
                 if (token_index == 0) {
                     // Select word
@@ -110,4 +114,3 @@ char *get_random_word(FILE *dictionary_file, char *category, char *difficulty)
 
     return result;
 }
-
