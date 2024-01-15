@@ -7,7 +7,6 @@
 
 int main(int argc, char *argv[])
 {
-    FILE * dictionary = read_file(argv[1]);
 
     // Testing args
     printf("You have entered %d arguments:\n", argc);
@@ -22,21 +21,19 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    char *dictionary_name = argv[1];
+    FILE * dictionary = fopen(dictionary_name, "r");
+    char *difficulty = argv[2];
+    char *category = argv[3];
+
     if (dictionary == NULL) {
         printf("%s\n", "Erreur: Dictionnaire sélectionné non valide");
-
         display_help();
 
         return 1;
     }
 
-    char *word = get_random_word(dictionary, argv[3], argv[2]);
-
-    // char *chara = "é";
-
-    // printf("TEST %s\n, toupper: ", chara);
-    
-    // // printf("char: %c, toupper: %c\n", chara, toupper(chara));
+    char *word = get_random_word(dictionary, category, difficulty);
 
     printf("Word: %s\n", word);
 
@@ -55,11 +52,35 @@ int main(int argc, char *argv[])
 
         if (my_strcmp(game.user_word, game.word_to_find) == 0) {
             printf("C'est gagné !\n");
-            break;
-            // printf("Voulez-vous recommencer ? Y : Oui, N : Non\n");
+            game.status = 'w';
+            // break;
         } else if (game.lives <= 0) {
             printf("Perdu :(\n");
-            break;
+            game.status = 'l';
+            // break;
+        }
+
+        if (game.status == 'w' || game.status == 'l') {
+            fclose(dictionary);
+
+            printf("Voulez-vous recommencer ? Y : Oui, N : Non\n");
+
+            scanf("%s", input_str);
+
+            // printf("TEST %c\n", toupper(input_str[0]));
+
+            if (toupper(input_str[0]) == 'Y') {
+                dictionary = fopen(dictionary_name, "r");
+
+                word = get_random_word(dictionary, category, difficulty);
+
+                init_game(&game, word);
+
+                continue;
+            } else {
+                printf("Byebye !\n");
+                break;
+            }
         }
 
         printf("You have %d lives\n", game.lives);
