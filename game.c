@@ -32,6 +32,11 @@ void init_game(_Game *game, char *word_to_find)
     game->status = 'o';
 }
 
+void display_help()
+{
+    printf("%s", "Utilisation du jeu : ./hangman dict.csv [facile/moyen/difficile] <category>\n");
+}
+
 #define MAX_CHARS 200
 
 char *get_random_word(FILE *dictionary_file, char *category, char *difficulty)

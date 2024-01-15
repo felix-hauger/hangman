@@ -16,8 +16,16 @@ int main(int argc, char *argv[])
         printf("%s\n", argv[i]);
     }
 
+    if (argv[1] == NULL || argv[2] == NULL || argv[3] == NULL) {
+        display_help();
+
+        return 1;
+    }
+
     if (dictionary == NULL) {
         printf("%s\n", "Erreur: Dictionnaire sélectionné non valide");
+
+        display_help();
 
         return 1;
     }
