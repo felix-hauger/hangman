@@ -51,14 +51,10 @@ int main(int argc, char *argv[])
 
     char *word = get_random_word(words);
 
-    // printf("Word: %s\n", word);
-
     // Game structure, contains game infos
     _Game game;
 
     init_game(&game, word);
-
-    // printf("Word to find: %s\n", game.word_to_find); // TEST
 
     char input_str[20];
 
@@ -78,14 +74,13 @@ int main(int argc, char *argv[])
         }
 
         if (game.status == 'w' || game.status == 'l') {
-            // Close the dictionnary to remove the pointer at the end of the file
+            // Close the dictionary to remove the pointer at the end of the file
             fclose(dictionary);
 
             printf("Voulez-vous recommencer ? Y : Oui, N : Non\n");
 
             scanf("%s", input_str);
 
-            // printf("TEST %c\n", toupper(input_str[0]));
 
             if (toupper(input_str[0]) == 'Y') {
                 dictionary = fopen(dictionary_name, "r");
@@ -141,7 +136,6 @@ int main(int argc, char *argv[])
         // If the user proposes one word
         } else {
             if (game.word_propositions_left > 0) {
-                // printf("String has %d chars\n", my_strlen(input_str));
 
                 printf("Mot proposé: %s\n", input_str);
                 if (my_strcmp(input_str, game.word_to_find) == 0) {
@@ -152,8 +146,7 @@ int main(int argc, char *argv[])
                     game.word_propositions_left--;
                 }
             } else {
-                printf("Vous ne pouvez plus proposer de mots.\n");
-                // printf("You can no longer propose words\n");
+                printf("Vous ne pouvez plus proposer de mot.\n");
             }
         }
     }

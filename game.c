@@ -46,9 +46,6 @@ _Word *get_words_from_dict(FILE *dictionary_file, char *category, char *difficul
     char * row;
     char * token;
 
-    // printf("Category: %s\n", category);
-    // printf("Difficulty: %s\n", difficulty);
-
     row = (char*)malloc(MAX_CHARS* sizeof(char));
 
     _Word *words = malloc(sizeof(_Word) * 500);
@@ -67,8 +64,6 @@ _Word *get_words_from_dict(FILE *dictionary_file, char *category, char *difficul
             int token_index = 0;
 
             while (token != NULL) {
-
-                // printf("Token: %s\n", token);
 
                 if (token_index == 0) {
                     // Select word
@@ -90,13 +85,9 @@ _Word *get_words_from_dict(FILE *dictionary_file, char *category, char *difficul
                 token_index++;
             }
 
+            // Check if the word match both selected category & difficulty
             if (my_strcmp(current_word.category, category) == 0 ) {
-
-                // printf("MATCHING CATEGORY %s\n", category);
-
                 if (my_strcmp(current_word.difficulty, difficulty) == 0) {
-                    // printf("MATCHING DIFFICULTY %s\n", difficulty);
-                    // printf("Adding word %s\n", current_word.word);
 
                     words[array_result_index] = current_word;
                     array_result_index++;
@@ -107,7 +98,6 @@ _Word *get_words_from_dict(FILE *dictionary_file, char *category, char *difficul
     }
 
     return words;
-
 }
 
 char *get_random_word(_Word *words)
