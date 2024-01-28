@@ -10,6 +10,7 @@ typedef struct Game
 {
     char status; // w = win, l = lose, o = ongoing, r = restart
     int lives;
+    int word_propositions_left; // For the user to propose a word
     char *word_to_find;
     char *user_word; // The hidden word displayed to the user
 }_Game;

@@ -29,6 +29,8 @@ void init_game(_Game *game, char *word_to_find)
 
     game->lives = 6;
 
+    game->word_propositions_left = 3;
+
     game->status = 'o';
 }
 

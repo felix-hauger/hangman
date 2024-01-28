@@ -42,13 +42,14 @@ int main(int argc, char *argv[])
 
     init_game(&game, word);
 
-    printf("Word to find: %s\n", game.word_to_find);
+    printf("Word to find: %s\n", game.word_to_find); // TEST
 
     char input_str[20];
 
     // Enter game loop
     while (game.status == 'o') {
 
+        printf("\n");
         printf("User word: %s\n", game.user_word);
 
         if (my_strcmp(game.user_word, game.word_to_find) == 0) {
@@ -85,12 +86,19 @@ int main(int argc, char *argv[])
 
         printf("You have %d lives\n", game.lives);
 
-        printf("Tapez une lettre\n");
+        printf("Tapez une lettre.");
+
+        if (game.word_propositions_left > 0) {
+            printf(" Vous pouvez également proposer un mot (restant : %d)", game.word_propositions_left);
+        }
+
+        printf("\n");
         
         scanf("%s", input_str);
 
         printf("Votre lettre : %s\n", input_str);
 
+        // If the user propose one character
         if (my_strlen(input_str) == 1) {
             printf("String has 1 char\n");
 
@@ -115,10 +123,23 @@ int main(int argc, char *argv[])
                 game.lives--;
             }
 
+        // If the user proposes one word
         } else {
-            printf("String has %d chars", my_strlen(input_str));
-        }
+            if (game.word_propositions_left > 0) {
+                printf("String has %d chars\n", my_strlen(input_str));
 
+                printf("Mot proposé: %s\n", input_str);
+                if (my_strcmp(input_str, game.word_to_find) == 0) {
+                    // If he's right, the word is considered found
+                    game.user_word = game.word_to_find;
+                } else {
+                    // Else he lose one possibility to propose a word
+                    game.word_propositions_left--;
+                }
+            } else {
+                printf("You can no longer propose words\n");
+            }
+        }
     }
 
     return 0;
