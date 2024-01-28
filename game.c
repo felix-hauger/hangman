@@ -114,7 +114,7 @@ char *get_random_word(FILE *dictionary_file, char *category, char *difficulty)
     // Select random word from matching results
     char *result = my_strdup(words[r].word);
 
-    printf("RESULT: %s\n", result);
+    // printf("RESULT: %s\n", result);
 
     while (array_result_index--) {
         // printf("Array result: %s\n", words[array_result_index].word);
@@ -133,76 +133,76 @@ void draw_hangman(int remaining_lives)
     {
     case 6:
         printf("  _____\n");
-        printf("  |   | \n");
-        printf("      | \n");
-        printf("      | \n");
-        printf("      | \n");
-        printf("      | \n");
+        printf("  |   |\n");
+        printf("      |\n");
+        printf("      |\n");
+        printf("      |\n");
+        printf("      |\n");
         printf("________\n");
         break;
 
     case 5:
         printf("  _____\n");
-        printf("  |   | \n");
-        printf("  O   | \n");
-        printf("      | \n");
-        printf("      | \n");
-        printf("      | \n");
+        printf("  |   |\n");
+        printf("  O   |\n");
+        printf("      |\n");
+        printf("      |\n");
+        printf("      |\n");
         printf("________\n");
         break;
 
     case 4:
         printf("  _____\n");
-        printf("  |   | \n");
-        printf("  O   | \n");
-        printf("  |   | \n");
-        printf("      | \n");
-        printf("      | \n");
+        printf("  |   |\n");
+        printf("  O   |\n");
+        printf("  |   |\n");
+        printf("      |\n");
+        printf("      |\n");
         printf("________\n");
         break;
 
     case 3:
         printf("  _____\n");
-        printf("  |   | \n");
-        printf("  O   | \n");
-        printf("  |\\  | \n");
-        printf("      | \n");
-        printf("      | \n");
+        printf("  |   |\n");
+        printf("  O   |\n");
+        printf("  |\\  |\n");
+        printf("      |\n");
+        printf("      |\n");
         printf("________\n");
         break;
 
     case 2:
         printf("  _____\n");
-        printf("  |   | \n");
-        printf("  O   | \n");
-        printf(" /|\\  | \n");
-        printf("      | \n");
-        printf("      | \n");
+        printf("  |   |\n");
+        printf("  O   |\n");
+        printf(" /|\\  |\n");
+        printf("      |\n");
+        printf("      |\n");
         printf("________\n");
         break;
 
     case 1:
         printf("  _____\n");
-        printf("  |   | \n");
-        printf("  O   | \n");
-        printf(" /|\\  | \n");
-        printf("   \\  | \n");
-        printf("      | \n");
+        printf("  |   |\n");
+        printf("  O   |\n");
+        printf(" /|\\  |\n");
+        printf("   \\  |\n");
+        printf("      |\n");
         printf("________\n");
         break;
 
     case 0:
         printf("  _____\n");
-        printf("  |   | \n");
-        printf("  O   | \n");
-        printf(" /|\\  | \n");
-        printf(" / \\  | \n");
-        printf("      | \n");
+        printf("  |   |\n");
+        printf("  O   |\n");
+        printf(" /|\\  |\n");
+        printf(" / \\  |\n");
+        printf("      |\n");
         printf("________\n");
         break;
 
     default:
-        printf("Valeur d'entrée non valide (vies restantes : %d)", remaining_lives);
+        printf("Valeur d'entrée non valide (Vies restantes : %d)", remaining_lives);
         break;
     }
 
