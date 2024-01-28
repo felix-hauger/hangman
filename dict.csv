@@ -4,6 +4,10 @@ pomme,fruits,facile
 banane,fruits,facile
 noix de coco,fruits,moyen
 papaye,fruits,difficile
+fraise,fruits,facile
+ananas,fruits,moyen
+avocat,fruits,difficile
+kiwi,fruits,moyen
 
 #Langages
 Cobol,langages,difficile
@@ -11,4 +15,23 @@ JavaScript,langages,moyen
 Assembly,langages,nope
 Java,langages,facile
 PHP,langages,facile
+Python,langages,moyen
+C++,langages,difficile
+Ruby,langages,facile
+Swift,langages,moyen
+
 #COOUCOU
+
+#TODO: GÉRER LES ACCENTS, QUI COMPTENT COMME 2 CHARS (= STRING)
+
+#Géographie
+montagne,géographie,difficile
+rivière,géographie,moyen
+plage,géographie,facile
+désert,géographie,difficile
+
+#Animaux
+chien,animaux,facile
+tigre,animaux,moyen
+serpent,animaux,difficile
+papillon,animaux,facile

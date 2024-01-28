@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
 
     char input_str[20];
 
+    // Enter game loop
     while (game.status == 'o') {
 
         printf("User word: %s\n", game.user_word);
@@ -97,11 +98,14 @@ int main(int argc, char *argv[])
             int i = 0;
             int has_a_matching_char = 0;
 
+            // Check if chosen char is present in the word to find
             while (game.word_to_find[i] != 0) {
                 if (toupper(input_str[0]) == toupper(game.word_to_find[i])) {
-                    has_a_matching_char = 1;
-                    
-                    game.user_word[i] = game.word_to_find[i];
+                    if (game.user_word[i] == '*') {
+                        has_a_matching_char = 1;
+                        
+                        game.user_word[i] = game.word_to_find[i];
+                    }
                 }
                 i++;
             }
