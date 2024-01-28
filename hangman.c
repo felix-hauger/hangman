@@ -26,8 +26,14 @@ int main(int argc, char *argv[])
     char *difficulty = argv[2];
     char *category = argv[3];
 
+    // TEST ARGUMENTS 
     if (dictionary == NULL) {
         printf("%s\n", "Erreur: Dictionnaire sélectionné non valide");
+        display_help();
+
+        return 1;
+    } else if (my_strcmp(difficulty, "facile") != 0 && my_strcmp(difficulty, "moyen") != 0 && my_strcmp(difficulty, "difficile") != 0) {
+        printf("%s\n", "Erreur: Difficulté sélectionnée non valide");
         display_help();
 
         return 1;
