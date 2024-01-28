@@ -37,10 +37,10 @@ int main(int argc, char *argv[])
 
     printf("Word: %s\n", word);
 
+    // Game structure, contains game infos
     _Game game;
 
     init_game(&game, word);
-
 
     printf("Word to find: %s\n", game.word_to_find);
 
@@ -54,14 +54,13 @@ int main(int argc, char *argv[])
         if (my_strcmp(game.user_word, game.word_to_find) == 0) {
             printf("C'est gagné !\n");
             game.status = 'w';
-            // break;
         } else if (game.lives <= 0) {
             printf("Perdu :(\n");
             game.status = 'l';
-            // break;
         }
 
         if (game.status == 'w' || game.status == 'l') {
+            // Close the dictionnary to remove the pointer at the end of the file
             fclose(dictionary);
 
             printf("Voulez-vous recommencer ? Y : Oui, N : Non\n");
@@ -100,7 +99,9 @@ int main(int argc, char *argv[])
 
             // Check if chosen char is present in the word to find
             while (game.word_to_find[i] != 0) {
+                // Check if chosen char match current char
                 if (toupper(input_str[0]) == toupper(game.word_to_find[i])) {
+                    // Check if current char has yet to be found
                     if (game.user_word[i] == '*') {
                         has_a_matching_char = 1;
                         

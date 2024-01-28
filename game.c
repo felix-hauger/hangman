@@ -111,7 +111,6 @@ char *get_random_word(FILE *dictionary_file, char *category, char *difficulty)
 
     // Select random word from matching results
     char *result = my_strdup(words[r].word);
-    // printf("RAND: %d\n");
 
     printf("RESULT: %s\n", result);
 
@@ -119,6 +118,7 @@ char *get_random_word(FILE *dictionary_file, char *category, char *difficulty)
         // printf("Array result: %s\n", words[array_result_index].word);
         free(words[array_result_index].word);
     }
+
     free(words);
     free(row);
 
