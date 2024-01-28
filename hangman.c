@@ -52,6 +52,8 @@ int main(int argc, char *argv[])
         printf("\n");
         printf("User word: %s\n", game.user_word);
 
+        draw_hangman(game.lives);
+
         if (my_strcmp(game.user_word, game.word_to_find) == 0) {
             printf("C'est gagné !\n");
             game.status = 'w';
@@ -84,7 +86,7 @@ int main(int argc, char *argv[])
             }
         }
 
-        printf("You have %d lives\n", game.lives);
+
 
         printf("Tapez une lettre.");
 

@@ -33,6 +33,7 @@ char *my_strdup(char *str);
 FILE * read_file(char *file_name);
 char *get_random_word(FILE * dictionary_file, char *category, char *difficulty);
 void display_help();
+void draw_hangman(int remaining_lives);
 
 
 #endif // HANGMAN_H
