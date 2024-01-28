@@ -31,7 +31,8 @@ int my_strcmp(char *s1, char *s2);
 int my_strlen(char *str);
 char *my_strdup(char *str);
 FILE * read_file(char *file_name);
-char *get_random_word(FILE * dictionary_file, char *category, char *difficulty);
+_Word *get_words_from_dict(FILE *dictionary_file, char *category, char *difficulty);
+char *get_random_word(_Word *words);
 void display_help();
 void draw_hangman(int remaining_lives);
 

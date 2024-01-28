@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 {
 
     // Testing args
-    printf("You have entered %d arguments:\n", argc);
+    // printf("You have entered %d arguments:\n", argc);
 
     for (int i = 0; i < argc; i++) {
         printf("%s\n", argv[i]);
@@ -39,24 +39,33 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    char *word = get_random_word(dictionary, category, difficulty);
+    _Word *words = get_words_from_dict(dictionary, category, difficulty);
 
-    printf("Word: %s\n", word);
+    if (words[0].word == NULL) {
+        printf("Aucun mot trouvé. Essayez une autre catégorie\n");
+
+        display_help();
+
+        return 1;
+    }
+
+    char *word = get_random_word(words);
+
+    // printf("Word: %s\n", word);
 
     // Game structure, contains game infos
     _Game game;
 
     init_game(&game, word);
 
-    printf("Word to find: %s\n", game.word_to_find); // TEST
+    // printf("Word to find: %s\n", game.word_to_find); // TEST
 
     char input_str[20];
 
     // Enter game loop
     while (game.status == 'o') {
 
-        printf("\n");
-        printf("User word: %s\n", game.user_word);
+        printf("\n""%s\n", game.user_word);
 
         draw_hangman(game.lives);
 
@@ -81,7 +90,7 @@ int main(int argc, char *argv[])
             if (toupper(input_str[0]) == 'Y') {
                 dictionary = fopen(dictionary_name, "r");
 
-                word = get_random_word(dictionary, category, difficulty);
+                word = get_random_word(words);
 
                 init_game(&game, word);
 
@@ -91,8 +100,6 @@ int main(int argc, char *argv[])
                 break;
             }
         }
-
-
 
         printf("Tapez une lettre.");
 
@@ -108,7 +115,7 @@ int main(int argc, char *argv[])
 
         // If the user propose one character
         if (my_strlen(input_str) == 1) {
-            printf("String has 1 char\n");
+            // printf("String has 1 char\n");
 
             int i = 0;
             int has_a_matching_char = 0;
@@ -134,7 +141,7 @@ int main(int argc, char *argv[])
         // If the user proposes one word
         } else {
             if (game.word_propositions_left > 0) {
-                printf("String has %d chars\n", my_strlen(input_str));
+                // printf("String has %d chars\n", my_strlen(input_str));
 
                 printf("Mot proposé: %s\n", input_str);
                 if (my_strcmp(input_str, game.word_to_find) == 0) {
@@ -145,10 +152,21 @@ int main(int argc, char *argv[])
                     game.word_propositions_left--;
                 }
             } else {
-                printf("You can no longer propose words\n");
+                printf("Vous ne pouvez plus proposer de mots.\n");
+                // printf("You can no longer propose words\n");
             }
         }
     }
+
+    int word_index = 0;
+
+    // Free the words at the end of the game
+    while (words[word_index].word != 0) {
+        free(words[word_index].word);
+        word_index++;
+    }
+
+    free(words);
 
     return 0;
 }

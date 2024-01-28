@@ -41,13 +41,13 @@ void display_help()
 
 #define MAX_CHARS 200
 
-char *get_random_word(FILE *dictionary_file, char *category, char *difficulty)
+_Word *get_words_from_dict(FILE *dictionary_file, char *category, char *difficulty)
 {
     char * row;
     char * token;
 
-    printf("Category: %s\n", category);
-    printf("Difficulty: %s\n", difficulty);
+    // printf("Category: %s\n", category);
+    // printf("Difficulty: %s\n", difficulty);
 
     row = (char*)malloc(MAX_CHARS* sizeof(char));
 
@@ -106,25 +106,25 @@ char *get_random_word(FILE *dictionary_file, char *category, char *difficulty)
         }
     }
 
+    return words;
+
+}
+
+char *get_random_word(_Word *words)
+{
+    // To get the size of the words array, to get the random number
+    int i = 0;
+
+    while (words[i].word != NULL) {
+        i++;
+    }
+
     // Init rand
     srand(time(NULL));
 
-    int r = rand() % array_result_index;
+    int r = rand() % i;
 
-    // Select random word from matching results
-    char *result = my_strdup(words[r].word);
-
-    // printf("RESULT: %s\n", result);
-
-    while (array_result_index--) {
-        // printf("Array result: %s\n", words[array_result_index].word);
-        free(words[array_result_index].word);
-    }
-
-    free(words);
-    free(row);
-
-    return result;
+    return words[r].word;
 }
 
 void draw_hangman(int remaining_lives)
