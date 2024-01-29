@@ -5,7 +5,7 @@ Hangman game written in C
 ## How to install
 
 1. Pull the repository or download and extract the archive
-2. Compile the code into an executable: `gcc -Wall -Wextra -Werror -o main *.c`
+2. Run `make` in your console to compile the program
 
 ## How to play
 
@@ -15,6 +15,6 @@ Launch the program with the next arguments:
 3. The category, which is optional
 
 Example:
-```c
+```shell
 ./hangman dict.csv easy languages
 ```
